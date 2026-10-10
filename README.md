@@ -1,4 +1,4 @@
-(BTW, This entire repository and all code is AI generated. I have been using it for a while, and it appears safe, but use at your own risk as it has not had manual human review. I recommended keeping it read-only.)
+(BTW, This entire repository and all code is AI generated. I have been using it for a while, and it appears safe, but use at your own risk as it has not had manual human review. I recommended keeping it read-only. It should be easy to point an agent to this repo and have it all set up for you.)
 # Canvas LMS MCP
 
 A self-hosted MCP server for the Canvas LMS API. It runs as an authenticated
