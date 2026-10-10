@@ -1,0 +1,61 @@
+services:
+  canvas-mcp:
+    build: .
+    init: true
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      CANVAS_BASE_URL: ${CANVAS_BASE_URL:?Set CANVAS_BASE_URL in .env}
+      HOST: 0.0.0.0
+      PORT: "3000"
+      READ_ONLY: ${READ_ONLY:-true}
+      MCP_URL_SECRET_FILE: /run/secrets/mcp_key
+      CANVAS_TOKEN_FILE: /run/secrets/canvas_token
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1,[::1],canvas-mcp}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-}
+      MCP_ALLOW_QUERY_KEY: ${MCP_ALLOW_QUERY_KEY:-false}
+      MAX_API_RESPONSE_BYTES: ${MAX_API_RESPONSE_BYTES:-2000000}
+      MAX_FILE_BYTES: ${MAX_FILE_BYTES:-10000000}
+      MAX_TEXT_CHARS: ${MAX_TEXT_CHARS:-200000}
+    secrets:
+      - mcp_key
+      - canvas_token
+    read_only: true
+    tmpfs:
+      - /tmp:size=32m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+  relay:
+    profiles: [relay]
+    build:
+      context: .
+      dockerfile: relay/Dockerfile
+    init: true
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8300:8300"
+    environment:
+      CANVAS_BASE_URL: ${CANVAS_BASE_URL:?Set CANVAS_BASE_URL in .env}
+      CANVAS_TOKEN_FILE: /run/secrets/canvas_token
+      RELAY_SHARED_SECRET_FILE: /run/secrets/relay_key
+      HOST: 0.0.0.0
+      PORT: "8300"
+      READ_ONLY: ${READ_ONLY:-true}
+    secrets:
+      - canvas_token
+      - relay_key
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+secrets:
+  mcp_key:
+    file: ./.secrets/mcp_key
+  canvas_token:
+    file: ./.secrets/canvas_token
+  relay_key:
+    file: ./.secrets/relay_key

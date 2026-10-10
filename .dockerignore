@@ -1,0 +1,13 @@
+.git
+**/node_modules
+**/.env
+**/.env.*
+**/.secrets
+**/secrets
+**/*.log
+**/*.pem
+**/*.key
+coverage
+dist
+.codex
+.agents
