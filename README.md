@@ -1,9 +1,9 @@
+(BTW, This entire repository and all code is AI generated. I have been using it for a while, and it appears safe, but use at your own risk as it has not had manual human review. I recommended keeping it read-only.)
 # Canvas LMS MCP
 
 A self-hosted MCP server for the Canvas LMS API. It runs as an authenticated
 Streamable HTTP service at `/mcp`, with Docker secret files and an optional
 outbound relay. Each installation supplies its own Canvas URL and API token.
-The repository contains no account data, course exports, or deployment secrets.
 
 ## What it exposes
 
@@ -40,6 +40,8 @@ unprivileged container user when mounted individually.
 Create a personal access token in your Canvas account settings if your
 institution permits it. Supply an API token rather than an account password.
 See the [Canvas authentication documentation](https://developerdocs.instructure.com/services/canvas/basics/file.oauth).
+
+(Note, it is pretty easy to make a token even from a student account, see https://{SCHOOL_STRING}.instructure.com/profile/settings#:~:text=Approved%20Integrations)
 
 The service binds to `127.0.0.1:3000` on the host. `/healthz` and `/readyz`
 provide public process status, without making a Canvas API request. `/health`
@@ -136,12 +138,7 @@ npm run check:privacy
 ```
 
 Tests use synthetic fixtures and local mock services. They do not connect to
-a real Canvas account. The privacy check inspects tracked and untracked files
-that Git would include, looking for private files, literal credentials, email
-addresses, and machine-specific paths. It is a guard against accidental
-commits, and requires a manual review of new data or documentation. CI also
-scans Git history using [Gitleaks](https://github.com/gitleaks/gitleaks).
-
+a real Canvas account. 
 Canvas results can contain the installing user's personal information at
 runtime. Treat tool output as private and avoid committing responses, logs,
 screenshots, or downloaded coursework. See [security guidance](SECURITY.md).
