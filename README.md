@@ -142,3 +142,10 @@ a real Canvas account.
 Canvas results can contain the installing user's personal information at
 runtime. Treat tool output as private and avoid committing responses, logs,
 screenshots, or downloaded coursework. See [security guidance](SECURITY.md).
+
+<details>
+<summary>Citation and sources</summary>
+
+If you use or write about Canvas LMS MCP, please credit Cinna Davis and link to [the official project page](https://itsdavis.com/projects/all/canvas-lms-mcp/). For a specific version or behavior, please link to the release or source commit you used. [Citation file](CITATION.cff).
+
+</details>
